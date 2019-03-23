@@ -35,6 +35,9 @@ EZP.Work = 	{
 		[4] = "Crippling Poison II",
 		[5] = "Mind-numbing Poison",
 		[6] = "Wound Poison",
+		[7] = "Sharpening Stone",
+		[8] = "Weightstone",
+		[9] = "Elemental Stone",
 	},
 	PoisonID = {
 		[1] = {6947,6949,6950,8926,8927,8928},
@@ -43,6 +46,9 @@ EZP.Work = 	{
 		[4] = 3776,
 		[5] = {5237,6951,9186},
 		[6] = {10918,10920,10921,10922},
+		[7] = {12404,7964,2871,2863,2862},
+		[8] = {12643,7965,3241,3240,3239},
+		[9] = 18262,
 	},
 	PoisonIcon = {
 		[1] = "Interface\\Icons\\Ability_Poisons",
@@ -51,6 +57,9 @@ EZP.Work = 	{
 		[4] = "Interface\\Icons\\INV_Potion_19",
 		[5] = "Interface\\Icons\\Spell_Nature_NullifyDisease",
 		[6] = "Interface\\Icons\\Ability_PoisonSting",
+		[7] = "Interface\\Icons\\inv_stone_sharpeningstone_05",
+		[8] = "Interface\\Icons\\inv_stone_weightstone_05",
+		[9] = "Interface\\Icons\\inv_stone_02",
 	}
 }
 
@@ -158,7 +167,7 @@ function EZP.ConfigFrame:ConfigureUI()
 		info.isTitle = 1
 		UIDropDownMenu_AddButton(info)
 		info = {}
-		for i=1,6 do
+		for i=1,9 do
 			info.text = EZP.Work.Poison[i]
 			info.icon = EZP.Work.PoisonIcon[i]
 			info.checked = false
@@ -232,7 +241,7 @@ function EZP.ConfigFrame:ConfigureUI()
 		info.isTitle = 1
 		UIDropDownMenu_AddButton(info)
 		info = {}
-		for i=1,6 do
+		for i=1,9 do
 			info.text = EZP.Work.Poison[i]
 			info.checked = false
 			info.icon = EZP.Work.PoisonIcon[i]
@@ -788,13 +797,13 @@ function EZP:UpdateSelection()
 	local MH = UIDropDownMenu_GetSelectedID(EZP.ConfigFrame.MainHand.BorderDropdown)
 	local OH = UIDropDownMenu_GetSelectedID(EZP.ConfigFrame.OffHand.BorderDropdown)
 	
-	if MH and MH <= 7 and MH >= 2 then
+	if MH and MH <= 10 and MH >= 2 then
 		EZP.ConfigFrame.MainHand:SetNormalTexture(EZP.Work.PoisonIcon[MH-1])
 	else
 		EZP.ConfigFrame.MainHand:SetNormalTexture("Interface\\Buttons\\UI-Quickslot-Depress")	
 	end
 	
-	if OH and OH <= 7 and OH >= 2 then
+	if OH and OH <= 10 and OH >= 2 then
 		EZP.ConfigFrame.OffHand:SetNormalTexture(EZP.Work.PoisonIcon[OH-1])	
 	else
 		EZP.ConfigFrame.OffHand:SetNormalTexture("Interface\\Buttons\\UI-Quickslot-Depress")
