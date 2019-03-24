@@ -48,7 +48,7 @@ EZP.Work = 	{
 		[6] = {10918,10920,10921,10922},
 		[7] = {12404,7964,2871,2863,2862},
 		[8] = {12643,7965,3241,3240,3239},
-		[9] = 18262,
+		[9] = {18262},
 	},
 	PoisonIcon = {
 		[1] = "Interface\\Icons\\Ability_Poisons",
@@ -612,8 +612,7 @@ function EZP:UpdatePoisonCount()
 		for i=0,4 do 
 			for j=1,18 do
 				if GetContainerItemInfo(i, j) then
-					--if string.find(poisonName,gsub(string.lower(gsub(GetContainerItemLink(i,j),"^.*%[(.*)%].*$","%1")),"-","")) then
-					if poisonName == gsub(string.lower(gsub(GetContainerItemLink(i,j),"^.*%[(.*)%].*$","%1")),"-","") then
+					if string.find(string.lower(gsub(GetContainerItemLink(i,j),"^.*%[(.*)%].*$","%1")), poisonName) then
 						_, count = GetContainerItemInfo(i, j)
 						countPoison = countPoison + count
 					end
@@ -649,7 +648,22 @@ function EZP:GetInventoryID(hand)
 		local H = 0
 		if hand == "MH" then H = UIDropDownMenu_GetSelectedID(EZP.ConfigFrame.MainHand.BorderDropdown)
 		elseif hand  == "OH" then H = UIDropDownMenu_GetSelectedID(EZP.ConfigFrame.OffHand.BorderDropdown) end
-		
+
+		-- Stones
+		if H==8 or H == 9 or H == 10 then
+			for k,v in pairs(EZP.Work.PoisonID[H-1]) do
+				for i = 0,4 do
+					for j = 1,18 do
+						if GetContainerItemInfo(i, j) then
+							if gsub(GetContainerItemLink(i,j),"^.*Hitem:(.-):.*","%1") == tostring(v) then
+								return {i,j,"", tostring(v) ,H-1}
+							end
+						end
+					end
+				end
+			end
+		end
+
 		-- if crippling poison 1
 		if H == 4 then
 			for i=0,4 do -- i = bagsnr.
