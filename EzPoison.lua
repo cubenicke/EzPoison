@@ -37,7 +37,7 @@ EZP.Work = 	{
 		[6] = "Wound Poison",
 		[7] = "Sharpening Stone",
 		[8] = "Weightstone",
-		[9] = "Elemental Stone",
+		[9] = "Elemental Sharpening Stone",
 	},
 	PoisonID = {
 		[1] = {6947,6949,6950,8926,8927,8928},
