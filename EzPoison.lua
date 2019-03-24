@@ -725,7 +725,7 @@ function EZP:GetInventoryID(hand)
 		-- rank 2
 		for i=0,4 do -- i = bagsnr.
 			for j=1,18 do -- j = slotnr.
-				if GetContainerItemInfo(i, j) and H <= 7 and H >= 2 then
+				if GetContainerItemInfo(i, j) and H <= 7 and H >= 2  and H ~=4 then
 					if gsub(GetContainerItemLink(i,j),"^.*%[(.*)%].*$","%1") == EZP.Work.Poison[H-1].." II" then return {i,j," II",EZP.Work.PoisonID[H-1][2],H-1} end
 				end
 			end
